@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subject, Observable, catchError, map, startWith, takeUntil, of } from 'rxjs';
 import { LoadingOverlay } from '../../../components/loading-overlay/loading-overlay';
@@ -46,7 +46,6 @@ export class VaiTro implements OnDestroy {
 
   constructor(
     private vaiTroService: VaitroService,
-    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -176,7 +175,11 @@ export class VaiTro implements OnDestroy {
   addModal() {
     this.isEditMode = false;
     this.modalTitle = 'Thêm vai trò';
-    this.formData = { id: 0, tenvaitro: '', trangthai: true };
+    this.formData = {
+      id: 0,
+      tenvaitro: '',
+      trangthai: true
+    };
     this.errorMessage = '';
     this.isModalOpen = true;
   }
