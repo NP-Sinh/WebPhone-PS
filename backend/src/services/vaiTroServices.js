@@ -1,9 +1,16 @@
 import { context } from "../config/dbconfig.js";
 
 export const vaiTroServices = {
-  getVaiTro: async () => {
+  getVaiTro: async (trangthai = null) => {
     try {
-      const result = await context.query("SELECT * FROM VaiTro WHERE trangthai = true ORDER BY id");
+      let query = "SELECT * FROM VaiTro";
+      let params = [];
+      if (trangthai !== null) {
+        query += " WHERE trangthai = $1";
+        params.push(trangthai);
+      }
+      query += " ORDER BY id";
+      const result = await context.query(query, params);
       return result.rows;
     } catch (error) {
       console.error("Lỗi lấy dữ liệu getVaiTro:", error);
