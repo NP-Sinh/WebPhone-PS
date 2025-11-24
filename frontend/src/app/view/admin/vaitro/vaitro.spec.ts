@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Vaitro } from './vaitro';
+import { VaiTro } from './vaitro';
 
 describe('Vaitro', () => {
-  let component: Vaitro;
-  let fixture: ComponentFixture<Vaitro>;
+  let component: VaiTro;
+  let fixture: ComponentFixture<VaiTro>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Vaitro]
+      imports: [VaiTro]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Vaitro);
+    fixture = TestBed.createComponent(VaiTro);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
