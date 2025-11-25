@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnDestroy, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-toast-notification',
@@ -7,29 +7,48 @@ import { Component, Input, ChangeDetectorRef } from '@angular/core';
   templateUrl: './toast-notification.html',
   styleUrl: './toast-notification.css',
 })
-export class ToastNotification {
+export class ToastNotification implements OnDestroy {
   @Input() message = '';
   @Input() type: 'success' | 'error' | 'warning' = 'success';
   @Input() duration = 3000;
 
   show = false;
+  private timeoutId: any = null;
 
-  constructor(private cdr: ChangeDetectorRef){}
+  constructor(private cdr: ChangeDetectorRef) {}
 
+  showToast(message: string, type: 'success' | 'error' | 'warning' = 'success', duration?: number) {
 
-  showToast(message: string, type: 'success' | 'error' | 'warning' = 'success') {
+    this.clearTimeout();
+
     this.message = message;
     this.type = type;
-    this.show = true;
+    if (duration) {
+      this.duration = duration;
+    }
 
+    this.show = true;
     this.cdr.detectChanges();
-    setTimeout(() => {
+
+    this.timeoutId = setTimeout(() => {
       this.hide();
     }, this.duration);
   }
 
   hide() {
+    this.clearTimeout();
     this.show = false;
     this.cdr.detectChanges();
+  }
+
+  private clearTimeout() {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = null;
+    }
+  }
+
+  ngOnDestroy() {
+    this.clearTimeout();
   }
 }
