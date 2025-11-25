@@ -48,4 +48,27 @@ export const vaiTroController = {
         }
     },
 
+    searchVaiTro: async (req, res) => {
+        try {
+            const {
+                searchText,
+                trangThai,
+                pageNumber = 1,
+                pageSize = 10
+            } = req.query;
+
+            const key = {
+                searchText: searchText || null,
+                trangThai: trangThai !== undefined ? trangThai === 'true' : null,
+                pageNumber: parseInt(pageNumber),
+                pageSize: parseInt(pageSize)
+            };
+
+            const data = await vaiTroServices.searchVaiTro(key);
+            res.status(200).json(data);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+
 }
