@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { Main } from './share/main/main';
 import { VaiTro } from './view/admin/vaitro/vaitro';
+import { Dashboard } from './view/admin/dashboard/dashboard';
 
 export const routes: Routes = [
   // {
@@ -13,12 +14,16 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'dashboard',
         pathMatch: 'full',
       },
       {
         path: 'vaitro',
         component: VaiTro,
+      },
+      {
+        path: 'dashboard',
+        component: Dashboard,
       },
     ],
   },

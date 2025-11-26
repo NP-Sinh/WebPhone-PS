@@ -39,7 +39,7 @@ export const vaiTroServices = {
         return result.rows[0];
       }
     } catch (error) {
-      console.error("Lỗi modiffy vai trò:", error);
+      console.error("Lỗi modify vai trò:", error);
     }
   },
 
